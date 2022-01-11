@@ -1,0 +1,22 @@
+﻿[X] Carregar Máquinas Mais rápido
+[X] Adicionar Receitas
+[O] Alterar Receitas
+[O] Mostrar tempo até a planta ficar pronta
+[X] Liberar Plantas em qualquer bioma
+[] Deixar Plantar Blueberry, raspberry, thistle e outras plantas
+[X] Alterar Respawn time das plantas
+[] Alterar Blast Furnace derreter tudo
+[] Blast Furnace derreter mais rápido
+[] Portal com destino selecionável
+[] Encantar Itens
+[] Balancear custo dos itens 
+[] Melhorar invasões
+[] 7 days to die Invasions
+[] Monstros especiais(encantados)
+[] Better Skills Buffs
+[] Boss Buffs Passives
+[] Food Buff without decay
+[] Magic Potions
+[] Carregar config from file
+[] 
+[] 

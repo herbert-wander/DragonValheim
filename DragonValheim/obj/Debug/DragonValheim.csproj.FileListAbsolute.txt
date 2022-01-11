@@ -1,0 +1,8 @@
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\bin\Debug\DragonValheim.dll
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\bin\Debug\DragonValheim.pdb
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csproj.CoreCompileInputs.cache
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.dll
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.pdb
+H:\SteamLibrary\steamapps\common\Valheim\BepInEx\plugins\DragonValheim.dll
+H:\SteamLibrary\steamapps\common\Valheim\BepInEx\plugins\DragonValheim.pdb
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csprojAssemblyReference.cache
