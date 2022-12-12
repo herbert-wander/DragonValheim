@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{764F28A2-4A3F-4546-BADA-B14E62FBE4CD}"
 	ProjectSection(SolutionItems) = preProject
 		DragonValheim\ItemList.txt = DragonValheim\ItemList.txt
+		README.md = README.md
 		DragonValheim\RecipeList.txt = DragonValheim\RecipeList.txt
 	EndProjectSection
 EndProject

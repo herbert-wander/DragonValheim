@@ -3,6 +3,10 @@ C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\bin\D
 C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csproj.CoreCompileInputs.cache
 C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.dll
 C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.pdb
+C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csprojAssemblyReference.cache
 H:\SteamLibrary\steamapps\common\Valheim\BepInEx\plugins\DragonValheim.dll
 H:\SteamLibrary\steamapps\common\Valheim\BepInEx\plugins\DragonValheim.pdb
-C:\Users\Dragon ANX\source\repos\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csprojAssemblyReference.cache
+G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csproj.CoreCompileInputs.cache
+G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csproj.CopyComplete
+G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.dll
+G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.pdb
