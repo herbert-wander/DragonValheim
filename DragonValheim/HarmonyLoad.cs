@@ -1,12 +1,6 @@
-﻿using BepInEx;
-using BepInEx.Configuration;
-using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
+﻿using HarmonyLib;
 using UnityEngine;
-using ValheimPictureFrame;
+//using ValheimPictureFrame;
 
 namespace DragonValheim
 {
@@ -95,14 +89,14 @@ namespace DragonValheim
             }
         }
 
-        [HarmonyPatch(typeof(PictureFrameBase), "GetHoverText")]
+        /*[HarmonyPatch(typeof(PictureFrameBase), "GetHoverText")]
         public class GetHoverTextPictureFrameBase
         {
             public static string Postfix(string __result, PictureFrameBase __instance)
             {
                 return __result = __result.Split(':')[2].Split(' ')[0];
             }
-        }
+        }*/
 
         [HarmonyPatch(typeof(Player), "OnSpawned")]
         public class GetOnSpawned
