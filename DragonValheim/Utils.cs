@@ -160,19 +160,23 @@ namespace DragonValheim
             return null;
         }
 
-        public void UpdateCraftingStationsDic(CraftingStation station)
+        public void UpdateCraftingStationsDic()
         {
-           if (!craftingStations.ContainsKey(station.m_name))
+            foreach (var item in ObjectDB.instance.m_recipes)
             {
-                try
+                if (item.m_craftingStation != null && !craftingStations.ContainsKey(item.m_craftingStation.m_name))
                 {
-                    craftingStations.Add(station.m_name, station);
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log("Dragon Valheim tried to add a NewStation, but that one was already registered!" + e.Message);
+                    try
+                    {
+                        craftingStations.Add(item.m_craftingStation.m_name, item.m_craftingStation);
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.Log("Dragon Valheim tried to add a NewStation, but that one was already registered!" + e.Message);
+                    }
                 }
             }
+            
         }
     }
 }

@@ -10,3 +10,6 @@ G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\D
 G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csproj.CopyComplete
 G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.dll
 G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.pdb
+X:\SteamLibrary\steamapps\common\Valheim\BepInEx\plugins\DragonValheim.dll
+X:\SteamLibrary\steamapps\common\Valheim\BepInEx\plugins\DragonValheim.pdb
+G:\Projects\Game-Modding\Valheim\DragonValheim\DragonValheim\DragonValheim\obj\Debug\DragonValheim.csproj.AssemblyReference.cache

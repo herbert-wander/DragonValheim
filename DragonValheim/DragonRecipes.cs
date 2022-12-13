@@ -13,6 +13,7 @@ namespace DragonValheim
         DragonRecipesList newRecipesList = new DragonRecipesList();
         [JsonIgnore, JsonProperty(Required = Required.Default)]
         DragonRecipesList changedRecipesList = new DragonRecipesList();
+        public static List<Recipe> playerNewRecipesList = new List<Recipe>();
         public class RecipeMaterials
         {
             private string item = null;
@@ -142,24 +143,44 @@ namespace DragonValheim
                 newRecipe.m_resources = craftMaterials.ToArray();
                 if (isNewRecipe)
                 {
+                    playerNewRecipesList.Add(newRecipe);
                     ObjectDB.instance.m_recipes.Add(newRecipe);
+                    ObjectDB.instance.m_recipes.Sort((x, y) => x.name.CompareTo(y.name));
                 }
                 recipe.isRecipeRegistred = true;
             }
         }
 
-        public  void TryToRegisterRecipesPlayer(Recipe recipe, Player player)
+        public  void TryToRegisterRecipesPlayer(Player player)
         {
-            if (!player.IsRecipeKnown(recipe.name))
+            if (playerNewRecipesList.Count > 0)
             {
-                if (recipe.m_craftingStation != null)
+                foreach (var recipe in playerNewRecipesList)
                 {
-                    if (player.KnowStationLevel(recipe.m_craftingStation.name, recipe.m_minStationLevel))
+                    if (!player.IsRecipeKnown(recipe.name))
                     {
-                        player.AddKnownRecipe(recipe);
+                        if (recipe.m_craftingStation != null)
+                        {
+                            if (player.KnowStationLevel(recipe.m_craftingStation.m_name, recipe.m_minStationLevel))
+                            {
+                                bool areAllMaterialsKnow = true;
+                                foreach (var material in recipe.m_resources)
+                                {
+                                    if (!player.IsKnownMaterial(material.m_resItem.m_itemData.m_shared.m_name))
+                                    {
+                                        areAllMaterialsKnow = false;
+                                    }
+                                }
+                                if (areAllMaterialsKnow)
+                                {
+                                    Debug.LogWarning("NEW Recipe {"+recipe.name+"} Added");
+                                    player.AddKnownRecipe(recipe);
+                                }
+                            }                   
+                        }
                     }
-                }               
-            }           
+                }
+            }                       
         }
     }
 }

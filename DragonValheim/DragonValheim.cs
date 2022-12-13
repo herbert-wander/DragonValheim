@@ -28,6 +28,7 @@ namespace DragonValheim
         {
             get => helper;
             set => helper = value;
+            
         }
 
         private void Awake()
