@@ -40,7 +40,7 @@
     <Compile Include="PickableDV.cs" />
     <Compile Include="ProductionMachines.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="DragonRecipes.cs" />
+    <Compile Include="DragonRecipe.cs" />
     <Compile Include="DragonValheim.cs" />
     <Compile Include="HarmonyLoad.cs" />
     <Compile Include="IgnoreAccessModifiers.cs" />

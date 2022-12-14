@@ -7,15 +7,16 @@ namespace DragonValheim
     
     class HarmonyLoad
     {
-        static Utils helper = DragonValheim.modInstance.Helper;
+        static readonly Utils helper = DragonValheim.modInstance.Helper;
 
         [HarmonyPatch(typeof(ObjectDB), "CopyOtherDB")]
         public static class ObjectDB_CopyOtherDB_Patch
         {
             public static void Postfix()
             {
-                //helper.UpdateCraftingStationsDic();
-                //DragonValheim.modInstance.RecipeManager.TryToRegisterRecipes(__instance);              
+                helper.UpdateCraftingStationsDic();
+                DragonValheim.modInstance.RecipeManager.TryToRegisterRecipes();
+                DragonValheim.modInstance.ConfigsManager.GenerateAllRecipesJsonFile();
             }
         }
         [HarmonyPatch(typeof(ObjectDB), "Awake")]
@@ -27,7 +28,7 @@ namespace DragonValheim
                 DragonValheim.modInstance.RecipeManager.TryToRegisterRecipes();
             }
          }
-        [HarmonyPatch(typeof(Player), "OnSpawned")]
+        /*[HarmonyPatch(typeof(Player), "OnSpawned")]
         public class GetOnSpawned
         {
             public static void Postfix(Player __instance)
@@ -35,7 +36,7 @@ namespace DragonValheim
                 //DragonRecipes recipeHelper = new DragonRecipes();
                 //recipeHelper.TryToRegisterRecipesPlayer(__instance);
             }
-        }
+        }*/
         [HarmonyPatch(typeof(Incinerator), "RPC_IncinerateRespons")]
         public class ModifyRPC_IncinerateRespons
         {
@@ -65,7 +66,7 @@ namespace DragonValheim
         {
             public static void Prefix(Incinerator __instance)
             {
-                Recipe receipeRecycle = null;
+                Recipe receipeRecycle;
                 helper.InventoryCopy.Clear();
                 int avaiableSlot = (__instance.m_container.m_inventory.m_width * __instance.m_container.m_inventory.m_height) - __instance.m_container.m_inventory.NrOfItems();
                 foreach (var itemFE in __instance.m_container.m_inventory.m_inventory)

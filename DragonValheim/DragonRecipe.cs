@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DragonValheim
 {
     
-    class DragonRecipes
+    class DragonRecipe
     {
         [JsonIgnore, JsonProperty(Required = Required.Default)]
         Utils helper = DragonValheim.modInstance.Helper;
@@ -33,9 +33,9 @@ namespace DragonValheim
         
         public class DragonRecipesList
         {
-            List<DragonRecipes> recipes = new List<DragonRecipes>();
+            List<DragonRecipe> recipes = new List<DragonRecipe>();
 
-            public List<DragonRecipes> Recipes
+            public List<DragonRecipe> Recipes
             {
                 get => recipes;
                 set => recipes = value;
@@ -116,10 +116,31 @@ namespace DragonValheim
                 LoadRecipe(item);
             }
         }
-
-        void LoadRecipe(DragonRecipes recipe)
+        public DragonRecipe RecipeToDragonRecipe(Recipe recipe)
         {
-            if (!recipe.isRecipeRegistred && recipe.enabled && helper.CraftingStations.ContainsKey(recipe.craftingStation))
+            DragonRecipe convertedRecipe = null;
+            if (recipe.m_enabled && recipe.name != null)
+            {
+                convertedRecipe = new DragonRecipe();
+                convertedRecipe.Name = recipe.name;
+                convertedRecipe.RepairStation = recipe.m_repairStation ? recipe.m_repairStation.m_name : null;
+                convertedRecipe.Amount = recipe.m_amount;
+                convertedRecipe.CraftingStation = recipe.m_craftingStation != null ? recipe.m_craftingStation.m_name:null;
+                convertedRecipe.MinStationLevel = recipe.m_minStationLevel;
+                convertedRecipe.Item = recipe.m_item.name;
+                //Debug.LogWarning(recipe.m_item.m_itemData.m_shared.m_name+" - "+ recipe.m_item.name);
+                List<DragonRecipe.RecipeMaterials> craftMaterials = new List<DragonRecipe.RecipeMaterials>();
+                foreach (var material in recipe.m_resources)
+                {
+                    craftMaterials.Add(new DragonRecipe.RecipeMaterials() { Amount = material.m_amount, Item = recipe.m_item.m_itemData.m_shared.m_name });
+                }
+                convertedRecipe.Resources = craftMaterials;
+            }
+            return convertedRecipe;
+        }
+        void LoadRecipe(DragonRecipe recipe)
+        {
+            if (/*!recipe.isRecipeRegistred && */recipe.enabled && helper.CraftingStations.ContainsKey(recipe.craftingStation))
             {
                 bool isNewRecipe = false;
                 Recipe newRecipe = null;
@@ -147,7 +168,7 @@ namespace DragonValheim
                     ObjectDB.instance.m_recipes.Add(newRecipe);
                     ObjectDB.instance.m_recipes.Sort((x, y) => x.name.CompareTo(y.name));
                 }
-                recipe.isRecipeRegistred = true;
+                //recipe.isRecipeRegistred = true;
             }
         }
 
@@ -173,7 +194,6 @@ namespace DragonValheim
                                 }
                                 if (areAllMaterialsKnow)
                                 {
-                                    Debug.LogWarning("NEW Recipe {"+recipe.name+"} Added");
                                     player.AddKnownRecipe(recipe);
                                 }
                             }                   

@@ -1,6 +1,6 @@
 ﻿[X] Carregar Máquinas Mais rápido
 [X] Adicionar Receitas
-[O] Alterar Receitas
+[x] Alterar Receitas
 [] Blast Furnace derreter mais rápido
 [] Portal com destino selecionável
 [] Encantar Itens

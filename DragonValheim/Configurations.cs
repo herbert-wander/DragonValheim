@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using Newtonsoft.Json;
 using System.IO;
 using System.Net;
 using UnityEngine;
@@ -88,6 +89,25 @@ namespace DragonValheim
             }
             //newDragonRecipesJson = readJsonFile(Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\DragonValheim\\DragonRecipes.json");
             //changedDragonRecipesJson = readJsonFile(Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\DragonValheim\\DragonChangeRecipes.json");
+        }
+
+        public void GenerateAllRecipesJsonFile()
+        {
+            string allRecipesJson = "{\n\"recipes\":[\n";
+            DragonRecipe converter = new DragonRecipe();
+            foreach (var item in ObjectDB.instance.m_recipes)
+            {
+                DragonRecipe recipe = converter.RecipeToDragonRecipe(item);
+                string data = recipe != null ? JsonConvert.SerializeObject(recipe, Formatting.Indented) :null;
+                if (data != null)
+                { 
+                    allRecipesJson += data+",";
+                }
+            }
+            allRecipesJson += "{}]}";
+            allRecipesJson = allRecipesJson.Replace(",{}]}", "]\n}");
+            allRecipesJson = allRecipesJson.Replace("},{", "},\n{");
+            File.WriteAllText(localJsonPath + "AllRecipes.json", allRecipesJson);
         }
     }
 }
