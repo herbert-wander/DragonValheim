@@ -26,17 +26,19 @@ namespace DragonValheim
              {
                 helper.UpdateCraftingStationsDic();
                 DragonValheim.modInstance.RecipeManager.TryToRegisterRecipes();
+                DragonValheim.modInstance.ConfigsManager.GenerateAllRecipesJsonFile();
             }
          }
-        /*[HarmonyPatch(typeof(Player), "OnSpawned")]
+        [HarmonyPatch(typeof(Player), "OnSpawned")]
         public class GetOnSpawned
         {
             public static void Postfix(Player __instance)
             {
+                //__instance.UpdateKnownRecipesList();
                 //DragonRecipes recipeHelper = new DragonRecipes();
                 //recipeHelper.TryToRegisterRecipesPlayer(__instance);
             }
-        }*/
+        }
         [HarmonyPatch(typeof(Incinerator), "RPC_IncinerateRespons")]
         public class ModifyRPC_IncinerateRespons
         {

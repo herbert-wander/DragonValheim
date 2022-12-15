@@ -119,6 +119,7 @@ namespace DragonValheim
         public DragonRecipe RecipeToDragonRecipe(Recipe recipe)
         {
             DragonRecipe convertedRecipe = null;
+            
             if (recipe.m_enabled && recipe.name != null)
             {
                 convertedRecipe = new DragonRecipe();
@@ -135,6 +136,13 @@ namespace DragonValheim
                     craftMaterials.Add(new DragonRecipe.RecipeMaterials() { Amount = material.m_amount, Item = recipe.m_item.m_itemData.m_shared.m_name });
                 }
                 convertedRecipe.Resources = craftMaterials;
+            }
+            if (!recipe.m_enabled)
+            {
+                if (!ReferenceEquals(recipe.m_item, null))
+                {
+                    recipe.m_enabled = true;
+                }
             }
             return convertedRecipe;
         }
