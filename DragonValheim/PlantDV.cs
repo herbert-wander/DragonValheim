@@ -2,7 +2,7 @@
 
 namespace DragonValheim
 {
-    class Plantas
+    class PlantDV
     {
         static Utils helper = DragonValheim.modInstance.Helper;
         public void removePlantBiomePlantingRestriction(Plant instancia)

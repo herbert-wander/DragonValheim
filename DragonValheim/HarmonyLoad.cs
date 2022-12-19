@@ -34,6 +34,20 @@ namespace DragonValheim
         {
             public static void Postfix(Player __instance)
             {
+                Tutorial.TutorialText newTutorial = new Tutorial.TutorialText()
+                {
+                    m_label = "DragonValheim Intro",
+                    m_name = "dvintro",
+                    m_text = "Bem vindo ao DragonValheim, um mod com vários QoL!\nEspero que se divirta!",
+                    m_topic = "Bem Vindo ao DragonValheim"
+                };
+
+                if (!Tutorial.instance.m_texts.Contains(newTutorial))
+                {
+                    Tutorial.instance.m_texts.Add(newTutorial);
+                }
+
+                __instance.ShowTutorial("dvintro");
                 //__instance.UpdateKnownRecipesList();
                 //DragonRecipes recipeHelper = new DragonRecipes();
                 //recipeHelper.TryToRegisterRecipesPlayer(__instance);
@@ -53,13 +67,8 @@ namespace DragonValheim
         */
             public static void Postfix(Incinerator __instance)
             {
-                if (helper.InventoryCopy != null && helper.InventoryCopy.Count > 0)
-                {
-                    foreach (var item in helper.InventoryCopy)
-                    {
-                        __instance.m_container.m_inventory.AddItem(item.GetComponent<ItemDrop>().m_itemData);
-                    }
-                }
+                Recycler recycler = new Recycler();
+                recycler.TryToInsertRecyledItens(__instance);
             }
         }
 
@@ -68,30 +77,8 @@ namespace DragonValheim
         {
             public static void Prefix(Incinerator __instance)
             {
-                Recipe receipeRecycle;
-                helper.InventoryCopy.Clear();
-                int avaiableSlot = (__instance.m_container.m_inventory.m_width * __instance.m_container.m_inventory.m_height) - __instance.m_container.m_inventory.NrOfItems();
-                foreach (var itemFE in __instance.m_container.m_inventory.m_inventory)
-                {
-                    if (itemFE.m_shared.m_name != null)
-                    {
-                        receipeRecycle = helper.GetRecipeFromObjectDB(itemFE.m_shared.m_name);
-                        if (receipeRecycle != null)
-                        {
-                            if (avaiableSlot + 1 - receipeRecycle.m_resources.Length >= 0)
-                            {
-                                foreach (var item in receipeRecycle.m_resources)
-                                {
-                                    GameObject itemToAdd = UnityEngine.Object.Instantiate(ObjectDB.instance.GetItemPrefab(item.m_resItem.name));
-                                    itemToAdd.GetComponent<ItemDrop>().m_itemData.m_stack = item.m_amount * itemFE.m_stack;
-                                    helper.InventoryCopy.Add(itemToAdd);
-                                }
-                            }
-                        }
-                    }
-                }
-                __instance.m_container.m_inventory.RemoveAll();
-                __instance.m_container.m_inventory.AddItem(ObjectDB.instance.GetItemPrefab("Coal"), 1);
+                Recycler recycler = new Recycler();
+                recycler.TryToRecyle(__instance);
             }
         }
 

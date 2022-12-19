@@ -35,16 +35,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ConfigData.cs" />
-    <Compile Include="Configurations.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="OldCodeMayBeUsefull.cs" />
     <Compile Include="PickableDV.cs" />
     <Compile Include="ProductionMachines.cs" />
+    <Compile Include="Recycler.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="DragonRecipe.cs" />
     <Compile Include="DragonValheim.cs" />
     <Compile Include="HarmonyLoad.cs" />
     <Compile Include="IgnoreAccessModifiers.cs" />
-    <Compile Include="Plantas.cs" />
+    <Compile Include="PlantDV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

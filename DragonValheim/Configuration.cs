@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DragonValheim
 {
-    class Configurations
+    class Configuration
     {
         Utils helper = DragonValheim.modInstance.Helper;
         readonly string localJsonPath = Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\DragonValheim\\";

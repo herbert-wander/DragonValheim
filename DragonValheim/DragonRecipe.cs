@@ -99,7 +99,7 @@ namespace DragonValheim
             set => resources = value;
         }
 
-        public void GenerateRecipesList(Configurations configsManager)
+        public void GenerateRecipesList(Configuration configsManager)
         {
             newRecipesList = helper.JsonConverter<DragonRecipesList>(configsManager.RecipesJson);
             changedRecipesList = helper.JsonConverter<DragonRecipesList>(configsManager.AltsJson);
@@ -124,7 +124,7 @@ namespace DragonValheim
             {
                 convertedRecipe = new DragonRecipe();
                 convertedRecipe.Name = recipe.name;
-                convertedRecipe.RepairStation = recipe.m_repairStation ? recipe.m_repairStation.m_name : null;
+                convertedRecipe.RepairStation = recipe.m_repairStation != null ? recipe.m_repairStation.m_name : null;
                 convertedRecipe.Amount = recipe.m_amount;
                 convertedRecipe.CraftingStation = recipe.m_craftingStation != null ? recipe.m_craftingStation.m_name:null;
                 convertedRecipe.MinStationLevel = recipe.m_minStationLevel;
@@ -133,7 +133,7 @@ namespace DragonValheim
                 List<DragonRecipe.RecipeMaterials> craftMaterials = new List<DragonRecipe.RecipeMaterials>();
                 foreach (var material in recipe.m_resources)
                 {
-                    craftMaterials.Add(new DragonRecipe.RecipeMaterials() { Amount = material.m_amount, Item = recipe.m_item.m_itemData.m_shared.m_name });
+                    craftMaterials.Add(new DragonRecipe.RecipeMaterials() { Amount = material.m_amount, Item = material.m_resItem.m_itemData.m_shared.m_name });
                 }
                 convertedRecipe.Resources = craftMaterials;
             }
@@ -148,7 +148,7 @@ namespace DragonValheim
         }
         void LoadRecipe(DragonRecipe recipe)
         {
-            if (/*!recipe.isRecipeRegistred && */recipe.enabled && helper.CraftingStations.ContainsKey(recipe.craftingStation))
+            if (recipe.enabled && helper.CraftingStations.ContainsKey(recipe.craftingStation))
             {
                 bool isNewRecipe = false;
                 Recipe newRecipe = null;
@@ -163,19 +163,24 @@ namespace DragonValheim
                 newRecipe.m_amount = (int)recipe.amount;
                 newRecipe.m_craftingStation = helper.CraftingStations[recipe.craftingStation];
                 newRecipe.m_minStationLevel = (int)recipe.minStationLevel;
-                newRecipe.m_item = ObjectDB.instance.GetItemPrefab(recipe.item).GetComponent<ItemDrop>();
-                List<Piece.Requirement> craftMaterials = new List<Piece.Requirement>();
-                foreach (var material in recipe.resources)
+                var itemPrefab = ObjectDB.instance.GetItemPrefab(recipe.item);
+                if (!ReferenceEquals(itemPrefab, null))
                 {
-                    craftMaterials.Add(new Piece.Requirement() { m_amount = (int)material.Amount, m_resItem = ObjectDB.instance.GetItemPrefab(material.Item).GetComponent<ItemDrop>() });
-                }
-                newRecipe.m_resources = craftMaterials.ToArray();
-                if (isNewRecipe)
-                {
-                    playerNewRecipesList.Add(newRecipe);
-                    ObjectDB.instance.m_recipes.Add(newRecipe);
-                    ObjectDB.instance.m_recipes.Sort((x, y) => x.name.CompareTo(y.name));
-                }
+                    newRecipe.m_item = itemPrefab.GetComponent<ItemDrop>();
+                    List<Piece.Requirement> craftMaterials = new List<Piece.Requirement>();
+                    foreach (var material in recipe.resources)
+                    {
+                        craftMaterials.Add(new Piece.Requirement() { m_amount = (int)material.Amount, m_resItem = ObjectDB.instance.GetItemPrefab(material.Item).GetComponent<ItemDrop>() });
+                    }
+                    newRecipe.m_resources = craftMaterials.ToArray();
+                    if (isNewRecipe)
+                    {
+                        //playerNewRecipesList.Add(newRecipe);
+                        ObjectDB.instance.m_recipes.Add(newRecipe);
+                        ObjectDB.instance.m_recipes.Sort((x, y) => x.name.CompareTo(y.name));
+                    }
+                }                
+                
                 //recipe.isRecipeRegistred = true;
             }
         }
