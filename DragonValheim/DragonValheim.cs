@@ -8,10 +8,9 @@ namespace DragonValheim
     class DragonValheim : BaseUnityPlugin
     {
         public static DragonValheim modInstance;
-        Harmony harmony = new Harmony("DragonMods");
+        readonly Harmony harmony = new Harmony("DragonMods");
         Configuration configsManager;
         DragonRecipe recipeManager;
-        HarmonyLoad harmonyPatchers;
         Utils helper = new Utils();
         public DragonRecipe RecipeManager
         {
@@ -36,7 +35,6 @@ namespace DragonValheim
             modInstance = this;
             configsManager = new Configuration();
             recipeManager = new DragonRecipe();
-            harmonyPatchers = new HarmonyLoad();
             Debug.LogWarning("DRAGON VALHEIM GOING FAST");
             configsManager.InitiateAllConfigFiles();
             recipeManager.GenerateRecipesList(configsManager);    

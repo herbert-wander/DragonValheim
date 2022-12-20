@@ -9,7 +9,7 @@ namespace DragonValheim
 {
     class Configuration
     {
-        Utils helper = DragonValheim.modInstance.Helper;
+        readonly Utils helper = DragonValheim.modInstance.Helper;
         readonly string localJsonPath = Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\DragonValheim\\";
         readonly string webJsonRecipesPath = "https://raw.githubusercontent.com/herbert-wander/modTesting/master/DragonRecipes.json";
         string recipesJson = null;

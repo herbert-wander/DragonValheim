@@ -8,7 +8,7 @@ namespace DragonValheim
     class DragonRecipe
     {
         [JsonIgnore, JsonProperty(Required = Required.Default)]
-        Utils helper = DragonValheim.modInstance.Helper;
+        readonly Utils helper = DragonValheim.modInstance.Helper;
         [JsonIgnore,JsonProperty(Required = Required .Default)]
         DragonRecipesList newRecipesList = new DragonRecipesList();
         [JsonIgnore, JsonProperty(Required = Required.Default)]
@@ -124,9 +124,9 @@ namespace DragonValheim
             {
                 convertedRecipe = new DragonRecipe();
                 convertedRecipe.Name = recipe.name;
-                convertedRecipe.RepairStation = recipe.m_repairStation != null ? recipe.m_repairStation.m_name : null;
+                convertedRecipe.RepairStation = recipe.m_repairStation?.m_name;
                 convertedRecipe.Amount = recipe.m_amount;
-                convertedRecipe.CraftingStation = recipe.m_craftingStation != null ? recipe.m_craftingStation.m_name:null;
+                convertedRecipe.CraftingStation = recipe.m_craftingStation?.m_name;
                 convertedRecipe.MinStationLevel = recipe.m_minStationLevel;
                 convertedRecipe.Item = recipe.m_item.name;
                 //Debug.LogWarning(recipe.m_item.m_itemData.m_shared.m_name+" - "+ recipe.m_item.name);

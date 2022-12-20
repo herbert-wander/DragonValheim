@@ -5,7 +5,7 @@ namespace DragonValheim
 {
     class ProductionMachines
     {
-        Utils helper = DragonValheim.modInstance.Helper;
+        readonly Utils helper = DragonValheim.modInstance.Helper;
         private class ItemConversionData
         {
             string rawMaterial = null;
@@ -41,9 +41,16 @@ namespace DragonValheim
                 {
                     coalAmount = Int32.Parse(configEntry.Value);
                 }
-
-                instance.SetFuel((float)(instance.GetFuel() + coalAmount));
-
+                if (spaceAvaiable>=coalAmount)
+                {
+                    instance.SetFuel((float)(instance.GetFuel() + coalAmount));
+                }
+                else
+                {
+                    coalAmount = spaceAvaiable;
+                    instance.SetFuel((float)(instance.GetFuel() + coalAmount));
+                }
+                
                 user.m_inventory.RemoveItem("$item_coal", coalAmount);
             }
         }
@@ -78,6 +85,10 @@ namespace DragonValheim
                 if (materialAmount >= Int32.Parse(configEntry.Value))
                 {
                     materialAmount = Int32.Parse(configEntry.Value);
+                }
+                if (materialAmount > spaceAvaiable)
+                {
+                    materialAmount = spaceAvaiable;
                 }
                 for (int i = 0; i < materialAmount - 1; i++)
                 {

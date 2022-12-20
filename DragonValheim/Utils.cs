@@ -57,6 +57,22 @@ namespace DragonValheim
             return color;
         }
 
+        public T GetComponent<T>(GameObject gameObject)
+        {
+            //
+            return (T)(object)gameObject.GetComponent(typeof(T));
+        }
+
+        public GameObject GetItemPrefab(string key)
+        {
+            return ObjectDB.instance.GetItemPrefab(key);
+        }
+
+        public GameObject InstantiateUnityObject(GameObject unityObject)
+        {
+            return UnityEngine.Object.Instantiate(unityObject);
+        }
+
         public string FormatSecondsToTime(int seconds)
         {
             string formatedTime = null;
@@ -135,6 +151,7 @@ namespace DragonValheim
             }
             return null;
         }
+
         public ItemDrop GetItemDropFromObjectDB(string searchKey)
         {
             foreach (var itemDB in ObjectDB.instance.m_items)
@@ -147,6 +164,7 @@ namespace DragonValheim
             }
             return null;
         }
+
         public ItemDrop.ItemData GetItemDataFromObjectDB(ItemDrop.ItemData searchKey)
         {
             foreach (var itemDB in ObjectDB.instance.m_items)

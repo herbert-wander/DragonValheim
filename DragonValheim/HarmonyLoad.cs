@@ -46,8 +46,32 @@ namespace DragonValheim
                 {
                     Tutorial.instance.m_texts.Add(newTutorial);
                 }
-
                 __instance.ShowTutorial("dvintro");
+                Debug.LogWarning("=========== Effects ===============");
+                foreach (var item in ObjectDB.instance.m_StatusEffects)
+                {
+                    Debug.LogWarning("Effect => "+item.m_name);
+                    Debug.LogWarning("Animation => " + item.m_activationAnimation);
+                    Debug.LogWarning("Category => " + item.m_category);
+                    Debug.LogWarning("Tooltip => " + item.m_tooltip);
+                }
+                Debug.LogWarning(" ");
+                Debug.LogWarning("=========== EVENTS ===============");
+                Debug.LogWarning("Event  Chance=> " + RandEventSystem.instance.m_eventChance);
+                foreach (var item in RandEventSystem.instance.m_events)
+                {
+                    Debug.LogWarning("Event => " + item.m_name);
+                    Debug.LogWarning("Biome => " + item.m_biome);
+                    Debug.LogWarning("Duration => " + item.m_duration);
+                    Debug.LogWarning("BaseOnly => " + item.m_nearBaseOnly);
+                    Debug.LogWarning("Message => " + item.m_startMessage);
+                    Debug.LogWarning("Enabled => " + item.m_enabled);
+                    
+                }
+                Debug.LogWarning(" ");
+                Debug.LogWarning("=========== FINISH ===============");
+               
+
                 //__instance.UpdateKnownRecipesList();
                 //DragonRecipes recipeHelper = new DragonRecipes();
                 //recipeHelper.TryToRegisterRecipesPlayer(__instance);

@@ -5,7 +5,7 @@ namespace DragonValheim
     {
         public void SetRespawnTime(Pickable instance, int time)
         {
-            instance.m_respawnTimeMinutes = 60;
+            instance.m_respawnTimeMinutes = time;
         }
     }
 }
